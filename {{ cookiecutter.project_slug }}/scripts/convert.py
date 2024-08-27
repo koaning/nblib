@@ -1,12 +1,13 @@
 import nbformat
 from pathlib import Path
 
-def convert_notebooks_to_python(folder_path):
-    folder = Path(folder_path)
+def convert_notebooks_to_python(input_folder, output_folder):
+    folder = Path(input_folder)
     
     # Iterate over all files in the specified folder
     for notebook_path in folder.glob("*.ipynb"):
-        python_file_path = notebook_path.with_suffix('.py')
+        new_root_folder = Path(output_folder)
+        python_file_path = new_root_folder / notebook_path.with_suffix('.py').parts[-1]
         
         # Read the notebook
         with notebook_path.open('r', encoding='utf-8') as nb_file:
@@ -21,5 +22,4 @@ def convert_notebooks_to_python(folder_path):
                 py_file.write(cell + '\n\n')
 
 if __name__ == "__main__":
-    folder_path = "path/to/your/notebooks"  # Replace with the path to your folder
-    convert_notebooks_to_python(folder_path)
+    convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
