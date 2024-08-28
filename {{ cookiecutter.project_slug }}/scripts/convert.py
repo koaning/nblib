@@ -52,7 +52,11 @@ def convert_notebook_to_docs(input_folder, output_folder):
                                 elif 'data' in output:
                                     if 'text/plain' in output['data']:
                                         md_file.write('```\n' + output['data']['text/plain'] + '\n```\n\n')
+                                    if 'image/png' in output['data']:
+                                        md_file.write(f'\n<img src="data:image/png;base64, {output['data']['image/png']}"/>\n')
 
 if __name__ == "__main__":
     convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
     convert_notebook_to_docs("src", "docs")
+    Path("docs/__init__.md").rename("docs/index.md")
+
