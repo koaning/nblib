@@ -56,3 +56,4 @@ def convert_notebook_to_docs(input_folder, output_folder):
 if __name__ == "__main__":
     convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
     convert_notebook_to_docs("src", "docs")
+    Path("docs/__init__.md").rename("docs/index.md")
