@@ -40,12 +40,12 @@ def convert_notebook_to_docs(input_folder, output_folder):
                 if cell['cell_type'] == 'markdown':
                     md_file.write(cell['source'] + '\n\n')
                 elif cell['cell_type'] == 'code':
-                    if cell['source'].strip().startswith('## KEEP'):
+                    if cell['source'].strip().startswith('## SHOW'):
                         md_file.write('```python\n')
-                        md_file.write(cell['source'].replace("## KEEP", "").strip() + '\n')
+                        md_file.write(cell['source'].replace("## SHOW", "").strip() + '\n')
                         md_file.write('```\n\n')
                         if 'outputs' in cell and cell['outputs']:
-                            md_file.write('Output:\n\n')
+                            md_file.write('##### Output:\n\n')
                             for output in cell['outputs']:
                                 if 'text' in output:
                                     md_file.write('```\n' + output['text'] + '\n```\n\n')
