@@ -24,7 +24,6 @@ def convert_notebooks_to_python(input_folder, output_folder):
 
 
 def convert_notebook_to_docs(input_folder, output_folder):
-    print("hello")
     folder = Path(input_folder)
     # Iterate over all files in the specified folder
     for notebook_path in folder.glob("*.ipynb"):
@@ -56,4 +55,4 @@ def convert_notebook_to_docs(input_folder, output_folder):
 
 if __name__ == "__main__":
     convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
-    convert_notebooks_to_python("src", "docs")
+    convert_notebook_to_docs("src", "docs")

@@ -37,7 +37,6 @@ def convert_notebook_to_docs(input_folder, output_folder):
         
         # Write the cells to a Markdown file
         with python_file_path.open('w', encoding='utf-8') as md_file:
-            print(python_file_path)
             for cell in nb_content['cells']:
                 if cell['cell_type'] == 'markdown':
                     md_file.write(cell['source'] + '\n\n')
@@ -55,9 +54,6 @@ def convert_notebook_to_docs(input_folder, output_folder):
                                     if 'text/plain' in output['data']:
                                         md_file.write('```\n' + output['data']['text/plain'] + '\n```\n\n')
 
-
-
 if __name__ == "__main__":
-    print("hello")
     convert_notebooks_to_python("src", "proj")
-    convert_notebook_to_docs("src", "docs")
+    convert_notebooks_to_python("src", "docs")
