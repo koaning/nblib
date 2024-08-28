@@ -4,4 +4,4 @@ commit:
 	git push origin main
 
 demo:
-	uv run --with cookiecutter cookiecutter -y https://github.com/koaning/nblib
+	uv run --with cookiecutter cookiecutter https://github.com/koaning/nblib
