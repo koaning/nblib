@@ -8,5 +8,5 @@ install:
 build:
 	uv run --with nbformat scripts/convert.py
 
-docs:
+docs: build
 	uv run --with mkdocs-material --with "mkdocstrings[python]>=0.18" mkdocs serve

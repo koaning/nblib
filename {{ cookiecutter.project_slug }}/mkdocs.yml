@@ -2,12 +2,9 @@ site_name: {{cookiecutter.project_name}}
 theme:
   name: material
   palette:
-    primary: custom
-plugins:
+    primary: whiteplugins:
 - mkdocstrings:
     handlers:
       python:
         options:
           allow_inspection: true
-extra_css:
-  - docs/stylesheets/extra.css
