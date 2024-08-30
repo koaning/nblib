@@ -6,5 +6,3 @@ commit:
 demo:
 	rm -rf proj
 	uv run --with cookiecutter cookiecutter https://github.com/koaning/nblib
-	cd proj
-	make docs
