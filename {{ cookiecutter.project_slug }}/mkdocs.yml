@@ -2,7 +2,7 @@ site_name: {{cookiecutter.project_name}}
 theme:
   name: material
   palette:
-    primary: whiteplugins:
+    primary: white
 - mkdocstrings:
     handlers:
       python:
