@@ -1,9 +1,13 @@
-site_name: My Docs
+site_name: {{cookiecutter.project_name}}
 theme:
   name: material
+  palette:
+    primary: custom
 plugins:
 - mkdocstrings:
     handlers:
       python:
         options:
           allow_inspection: true
+extra_css:
+  - docs/stylesheets/extra.css
