@@ -3,6 +3,7 @@ theme:
   name: material
   palette:
     primary: white
+plugins:
 - mkdocstrings:
     handlers:
       python:
