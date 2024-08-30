@@ -59,3 +59,4 @@ if __name__ == "__main__":
     convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
     convert_notebook_to_docs("src", "docs")
     Path("docs/__init__.md").rename("docs/index.md")
+    Path("README.md").write_text(Path("docs/index.md").read_text())
