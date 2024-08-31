@@ -6,9 +6,13 @@ install:
 	uv run pip install -e . -r requirements-dev.txt -r requirements.txt jupyterlab nbformat
 
 build:
-	cp -r src/* .tmpdir/.* .
-	uv run --with-requirements requirements-dev.txt --with-requirements requirements.txt python -m jupyter nbconvert --to notebook --execute .tmpdir/*.ipynb
+	rm -rf .tmpdir
+	mkdir .tmpdir
+	cp -r src/* .tmpdir
+	uv pip install -e . -r requirements-dev.txt -r requirements.txt jupyterlab nbformat
+	uv run python -m jupyter nbconvert --to notebook --execute .tmpdir/*.ipynb
 	uv run --with nbformat scripts/convert.py
+	rm -rf .tmpdir
 
 docs: build
 	uv run --with mkdocs-material --with "mkdocstrings[python]>=0.18" mkdocs serve

@@ -27,7 +27,7 @@ def convert_notebooks_to_python(input_folder, output_folder):
 def convert_notebook_to_docs(input_folder, output_folder):
     folder = Path(input_folder)
     # Iterate over all files in the specified folder
-    for notebook_path in folder.glob("*.ipynb"):
+    for notebook_path in folder.glob("*.nbconvert.ipynb"):
         new_root_folder = Path(output_folder)
         python_file_path = new_root_folder / notebook_path.with_suffix('.md').parts[-1]
         
@@ -59,12 +59,7 @@ def convert_notebook_to_docs(input_folder, output_folder):
                                         md_file.write(f'\n<img src="data:image/png;base64, {img_repr}"/>\n')
 
 if __name__ == "__main__":
-    with tempfile.TemporaryDirectory() as tmpdir:
-        for file in Path("src").glob("*.ipynb"):
-            newfile = Path(tmpdir) / file.name
-            newfile.write_text(file.read_text())
-
-        convert_notebooks_to_python(tmpdir, "{{ cookiecutter.project_slug }}")
-        convert_notebook_to_docs(tmpdir, "docs")
+    convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
+    convert_notebook_to_docs(".tmpdir", "docs")
     Path("docs/__init__.md").rename("docs/index.md")
     Path("README.md").write_text(Path("docs/index.md").read_text())
