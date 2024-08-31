@@ -10,3 +10,8 @@ plugins:
       python:
         options:
           allow_inspection: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences

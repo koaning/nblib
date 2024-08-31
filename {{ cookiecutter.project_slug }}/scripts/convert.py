@@ -45,15 +45,17 @@ def convert_notebook_to_docs(input_folder, output_folder):
                         md_file.write(cell['source'].replace("## SHOW", "").strip() + '\n')
                         md_file.write('```\n\n')
                         if 'outputs' in cell and cell['outputs']:
-                            md_file.write('##### Output:\n\n')
+                            md_file.write('**Output:**\n\n')
                             for output in cell['outputs']:
                                 if 'text' in output:
                                     md_file.write('```\n' + output['text'] + '\n```\n\n')
                                 elif 'data' in output:
                                     if 'text/plain' in output['data']:
-                                        md_file.write('```\n' + output['data']['text/plain'] + '\n```\n\n')
+                                        if not '<Figure' in output['data']['text/plain']:
+                                            md_file.write('```\n' + output['data']['text/plain'] + '\n```\n\n')
                                     if 'image/png' in output['data']:
-                                        md_file.write(f'\n<img src="data:image/png;base64, {output['data']['image/png']}"/>\n')
+                                        img_repr = output["data"]["image/png"]
+                                        md_file.write(f'\n<img src="data:image/png;base64, {img_repr}"/>\n')
 
 if __name__ == "__main__":
     convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
