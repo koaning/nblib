@@ -29,7 +29,7 @@ def convert_notebook_to_docs(input_folder, output_folder):
     # Iterate over all files in the specified folder
     for notebook_path in folder.glob("*.nbconvert.ipynb"):
         new_root_folder = Path(output_folder)
-        python_file_path = new_root_folder / notebook_path.with_suffix('.md').parts[-1]
+        python_file_path = new_root_folder / notebook_path.with_suffix('.md').parts[-1].replace(".nbconvert", "")
         
         # Read the notebook
         with notebook_path.open('r', encoding='utf-8') as nb_file:
