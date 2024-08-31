@@ -18,7 +18,7 @@ def convert_notebook_to_docs(input_folder, output_folder):
                 if cell['cell_type'] == 'markdown':
                     md_file.write(cell['source'] + '\n\n')
                 elif cell['cell_type'] == 'code':
-                    if "## HIDE" not in cell['source'].strip():
+                    if "## HIDE" not in cell['source'] and "## EXPORT" not in cell['source']:
                         md_file.write('```python\n')
                         md_file.write(cell['source'].strip() + '\n')
                         md_file.write('```\n\n')
