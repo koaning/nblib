@@ -20,9 +20,8 @@ def convert_notebooks_to_python(input_folder, output_folder):
         # Write the code cells to a Python file
         with python_file_path.open('w', encoding='utf-8') as py_file:
             for cell in code_cells:
-                if "## DOCSONLY" in cell:
-                    continue
-                py_file.write(cell + '\n\n')
+                if "## EXPORT" in cell:
+                    py_file.write(cell + '\n\n')
 
 
 def convert_notebook_to_docs(input_folder, output_folder):
@@ -42,9 +41,9 @@ def convert_notebook_to_docs(input_folder, output_folder):
                 if cell['cell_type'] == 'markdown':
                     md_file.write(cell['source'] + '\n\n')
                 elif cell['cell_type'] == 'code':
-                    if cell['source'].strip().startswith('## SHOW'):
+                    if "## HIDE" not in cell['source'].strip():
                         md_file.write('```python\n')
-                        md_file.write(cell['source'].replace("## SHOW", "").replace("## DOCSONLY", "").strip() + '\n')
+                        md_file.write(cell['source'].strip() + '\n')
                         md_file.write('```\n\n')
                         if 'outputs' in cell and cell['outputs']:
                             md_file.write('**Output:**\n\n')

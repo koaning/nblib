@@ -1,4 +1,5 @@
 commit:
+	rm -rf proj
 	git add . 
 	git commit -m "update"
 	git push origin main
