@@ -1,3 +1,4 @@
+import tempfile
 import nbformat
 from pathlib import Path
 
@@ -18,12 +19,12 @@ def convert_notebooks_to_python(input_folder, output_folder):
         code_cells = [cell['source'] for cell in nb_content['cells'] if cell['cell_type'] == 'code']
         
         # Write the code cells to a Python file
+        # Write the code cells to a Python file
         with python_file_path.open('w', encoding='utf-8') as py_file:
             for cell in code_cells:
                 if "## DOCSONLY" in cell:
                     continue
                 py_file.write(cell + '\n\n')
-
 
 def convert_notebook_to_docs(input_folder, output_folder):
     folder = Path(input_folder)
@@ -60,7 +61,7 @@ def convert_notebook_to_docs(input_folder, output_folder):
                                         md_file.write(f'\n<img src="data:image/png;base64, {img_repr}"/>\n')
 
 if __name__ == "__main__":
-    convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
+    convert_notebooks_to_python("src", "proj")
     convert_notebook_to_docs(".tmpdir", "docs")
     Path("docs/__init__.md").rename("docs/index.md")
     Path("README.md").write_text(Path("docs/index.md").read_text())

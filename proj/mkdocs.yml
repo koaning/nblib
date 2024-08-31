@@ -1,0 +1,17 @@
+site_name: proj
+theme:
+  name: material
+  palette:
+    primary: white
+
+plugins:
+- mkdocstrings:
+    handlers:
+      python:
+        options:
+          allow_inspection: true
+
+markdown_extensions:
+  - pymdownx.highlight:
+      use_pygments: true
+  - pymdownx.superfences
