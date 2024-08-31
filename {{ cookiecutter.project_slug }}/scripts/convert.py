@@ -1,3 +1,4 @@
+import tempfile
 import nbformat
 from pathlib import Path
 
@@ -58,7 +59,12 @@ def convert_notebook_to_docs(input_folder, output_folder):
                                         md_file.write(f'\n<img src="data:image/png;base64, {img_repr}"/>\n')
 
 if __name__ == "__main__":
-    convert_notebooks_to_python("src", "{{ cookiecutter.project_slug }}")
-    convert_notebook_to_docs("src", "docs")
+    with tempfile.TemporaryDirectory() as tmpdir:
+        for file in Path("src").glob("*.ipynb"):
+            newfile = Path(tmpdir) / file.name
+            newfile.write_text(file.read_text())
+
+        convert_notebooks_to_python(tmpdir, "{{ cookiecutter.project_slug }}")
+        convert_notebook_to_docs(tmpdir, "docs")
     Path("docs/__init__.md").rename("docs/index.md")
     Path("README.md").write_text(Path("docs/index.md").read_text())
